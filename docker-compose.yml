@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  data_ingestion:
+    # ... (existing configuration for data ingestion container)
+
+  mongodb:
+    # ... (existing configuration for MongoDB container)
+
+  etl_process:
+    build:
+      context: .
+      dockerfile: Dockerfile.etl
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
