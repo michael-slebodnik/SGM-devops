@@ -3,7 +3,7 @@ import requests
 from pymongo import MongoClient
 
 api_key = '079025fd2d352a88e95dc71b9a51efcc'
-url = f"https://api.openweathermap.org/data/2.5/weather?lat=40.64&lon=22.93&appid={api_key}"
+url = f"https://api.openweathermap.org/data/2.5/weather?lat=40.64&lon=22.93&appid={api_key}&units=metric"
 
 
 def fetch_weather_data(url):

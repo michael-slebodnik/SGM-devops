@@ -15,15 +15,12 @@ services:
       - mysql
   mysql:
     build: ./mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: weather
     volumes:
       - mysql_data:/var/lib/mysql
   metabase:
-    image: metabase/metabase
+    build: ./metabase
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
       - mysql
 
