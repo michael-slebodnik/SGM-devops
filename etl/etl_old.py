@@ -31,13 +31,10 @@ def fetch_from_mongo(mongo_collection):
     return mongo_collection.find().sort('_id', -1).limit(1)
 
 
-def insert_into_mysql(mysql_cursor, name, temp_kelvin):
-    # Convert temperature from Kelvin to Celsius
-    temp_celsius = temp_kelvin - 273.15
-
+def insert_into_mysql(mysql_cursor, name, temp):
     # Insert data into MySQL
-    insert_query = "INSERT INTO weather_data (city, temperature_celsius) VALUES (%s, %s)"
-    mysql_cursor.execute(insert_query, (name, temp_celsius))
+    insert_query = "INSERT INTO weather_data (city, temperature) VALUES (%s, %s)"
+    mysql_cursor.execute(insert_query, (name, temp))
 
 
 def main():
@@ -55,14 +52,12 @@ def main():
             with mysql_conn.cursor() as mysql_cursor:
                 for record in last_record:
                     name = record.get('name', 'Unknown')
-                    temp_kelvin = record['main']['temp'] if 'main' in record and 'temp' in record['main'] else None
+                    temp = record['main']['temp'] if 'main' in record and 'temp' in record['main'] else None
 
-                    if temp_kelvin is not None:
-                        # Convert temperature from Kelvin to Celsius and insert into MySQL
-                        temp_celsius = temp_kelvin - 273.15
-                        insert_into_mysql(mysql_cursor, name, temp_celsius)
+                    if temp is not None:
+                        insert_into_mysql(mysql_cursor, name, temp)
                         mysql_conn.commit()
-                        print(f"Data inserted: {name}, {temp_celsius} °C")
+                        print(f"Data inserted: {name}, {temp}")
                     else:
                         print("No temperature data found in the record")
             time.sleep(15)  # Pause for 15 seconds
