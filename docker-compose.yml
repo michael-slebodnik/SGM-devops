@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  app:
+    build: ./data_collection
+    depends_on:
+      - mongo
+  mongo:
+    build: ./mongo
+    volumes:
+      - mongodb_data:/data/db
+  etl:
+    build: ./etl
+    depends_on:
+      - mongo
+      - mysql
+  mysql:
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: weather
+    volumes:
+      - mysql_data:/var/lib/mysql
+  metabase:
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+
+volumes:
+  mongodb_data:
+  mysql_data:
