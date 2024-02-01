@@ -18,7 +18,7 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/etl'] 
-	
+
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/data_collection']
 
