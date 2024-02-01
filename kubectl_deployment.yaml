@@ -1,0 +1,19 @@
+# kubectl_deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sgm-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sgm
+  template:
+    metadata:
+      labels: sgm
+        app: sgm
+    spec:
+      containers:
+      - name: mongodb
+        image: europe-west3-docker.pkg.dev/quests-michael/sgm/mongo
