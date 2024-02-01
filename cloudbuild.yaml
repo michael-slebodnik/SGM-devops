@@ -1,0 +1,20 @@
+# cloudbuild.yaml
+
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-etl', 'etl/']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-app', 'data_collection/']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-mysql', 'mysql/']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-mongo', 'mongo/']
+
+images:
+  - 'gcr.io/quests-michael/sgm-devops-etl'
+  - 'gcr.io/quests-michael/sgm-devops-app'
+  - 'gcr.io/quests-michael/sgm-devops-mysql'
+  - 'gcr.io/quests-michael/sgm-devops-mongo'
