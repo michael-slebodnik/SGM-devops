@@ -2,19 +2,26 @@
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-etl', 'etl/']
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/quests-michael/sgm/etl', 'etl/']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-app', 'data_collection/']
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/quests-michael/sgm/data_collection', 'data_collection/']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-mysql', 'mysql/']
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/quests-michael/sgm/mysql', 'mysql/']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/quests-michael/sgm-devops-mongo', 'mongo/']
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/quests-michael/sgm/mongo', 'mongo/']
+		
 
-images:
-  - 'gcr.io/quests-michael/sgm-devops-etl'
-  - 'gcr.io/quests-michael/sgm-devops-app'
-  - 'gcr.io/quests-michael/sgm-devops-mysql'
-  - 'gcr.io/quests-michael/sgm-devops-mongo'
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/etl'] 
+	
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/data_collection']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/mysql']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/mongo']	
