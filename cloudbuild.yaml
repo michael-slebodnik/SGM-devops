@@ -14,16 +14,24 @@ steps:
     args: ['build', '-t', 'europe-west3-docker.pkg.dev/quests-michael/sgm/mongo', 'mongo/']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/etl'] 
+    args: ['build', '-t', 'europe-west3-docker.pkg.dev/quests-michael/sgm/metabase', 'metabase/']
 
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/etl'] 
+	
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/data_collection']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/mysql']
-    
+
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/mongo']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west3-docker.pkg.dev/quests-michael/sgm/metabase']
+
+
 
 # Set up kubectl
 
