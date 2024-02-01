@@ -17,3 +17,11 @@ spec:
       containers:
       - name: mongodb
         image: europe-west3-docker.pkg.dev/quests-michael/sgm/mongo
+      - name: mysql
+        image: europe-west3-docker.pkg.dev/quests-michael/sgm/mysql
+      - name: data_collection
+        image: europe-west3-docker.pkg.dev/quests-michael/sgm/data_collection
+      - name: etl
+        image: europe-west3-docker.pkg.dev/quests-michael/sgm/etl
+      - name: metabase
+        image: europe-west3-docker.pkg.dev/quests-michael/sgm/metabase
