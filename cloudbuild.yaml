@@ -1,6 +1,9 @@
 # cloudbuild.yaml
 
 steps:
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/michael-slebodnik/SGM-devops.git']
+
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'europe-west3-docker.pkg.dev/quests-michael/sgm/etl', 'etl/']
 
